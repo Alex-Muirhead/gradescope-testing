@@ -1,0 +1,18 @@
+{
+    "tests": [
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "run_tests.py::TestDummy::test_foo",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "run_tests.py::TestDummy::test_fail",
+            "output": "\nself = <run_tests.TestDummy object at 0x7fa2477894d0>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_fail\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m):\u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m foo(\u001b[33m\"\u001b[39;49;00m\u001b[33mb\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m, \u001b[94m2\u001b[39;49;00m) == \u001b[33m\"\u001b[39;49;00m\u001b[33mb\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: assert 'bb' == 'b'\u001b[0m\n\u001b[1m\u001b[31mE         - b\u001b[0m\n\u001b[1m\u001b[31mE         + bb\u001b[0m\n\n\u001b[1m\u001b[31mrun_tests.py\u001b[0m:10: AssertionError",
+            "visibility": "visible"
+        }
+    ]
+}
