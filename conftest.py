@@ -1,47 +1,48 @@
 import json
 import pytest
+from io import StringIO
 from typing import Union
 from _pytest.terminal import TerminalReporter
-from _pytest import capture
-from _pytest import runner
 
 
 Report = Union[pytest.CollectReport, pytest.TestReport]
-
-metadata = {}
-test_group_stats = {}
+MIN_LINES_DIFF = 5
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     # execute all other hooks to obtain the report object
-    print(call.excinfo)
-    print(item)
     outcome = yield
     rep = outcome.get_result()
-    print(rep.longrepr)
 
 
-def pytest_generate_tests(metafunc):
-    function = metafunc.function
-    module   = function.__module__
-    qualname = function.__qualname__.replace('.', '::')
-
-    if hasattr(function, '_group_stats'):
-        group_stats = function._group_stats
-
-        for group_name, stats in group_stats.items():
-            stats['max_score'] *= getattr(function, 'max_score', 0)
-            stats['score'] *= getattr(function, 'max_score', 0)
-            test_name = f'{module}.py::{qualname}[{group_name}]'
-            test_group_stats[test_name] = stats
-
-        metafunc.parametrize('group_name', group_stats.keys())
-    else:
-        test_name = f'{module}.py::{qualname}'
-        test_group_stats[test_name] = {
-            'max_score': getattr(metafunc.function, 'max_score', 0)
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_pycollect_makeitem(
+    collector: Union[pytest.Module, pytest.Class],
+    name: str,
+    obj: object
+):
+    outcome = (yield).get_result()
+    if outcome is None:
+        return
+    # Turn into a list for iteration
+    if not isinstance(outcome, (list, tuple)):
+        outcome = [outcome]
+    for item in outcome:
+        # nodeid = collector.nodeid + "::" + item.name
+        properties = {
+            'max_score': getattr(obj, 'max_score', 0)
         }
+        # test_group_stats[nodeid] = properties
+        # item.stash[score_info_key] = properties
+        item.user_properties = list(properties.items())
+
+
+@pytest.fixture
+def sysin(monkeypatch):
+    input_stream = StringIO()
+    monkeypatch.setattr("sys.stdin", input_stream)
+    yield input_stream
 
 
 def pytest_terminal_summary(terminalreporter: TerminalReporter, exitstatus):
@@ -55,17 +56,19 @@ def pytest_terminal_summary(terminalreporter: TerminalReporter, exitstatus):
 
     for report in all_tests:
         output = report.capstdout + '\n' + report.capstderr
-        group_stats = test_group_stats[report.nodeid]
+        group_stats = dict(report.user_properties)
 
         max_score = group_stats['max_score']
         score = group_stats.get('score', max_score if report.passed else 0)
 
-        from io import StringIO
+        # Don't have access to config... or do we?
         from _pytest._io import TerminalWriter
 
+        # NOTE: Recreating BaseReport.longreprtext but *with* markup
         file = StringIO()
         tw = TerminalWriter(file)
-        tw.hasmarkup = True
+        # INFO: Can be properly controlled with the PY_COLOR env var
+        # tw.hasmarkup = True
         report.toterminal(tw)
         exc = file.getvalue()
 

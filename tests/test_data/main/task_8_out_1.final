@@ -1,0 +1,35 @@
+Please enter a command: h
+
+    The available commands are:
+
+    'h' - provide help message
+    'r' - read input paramaters for various scenarios from a file
+    'p no_cols sep' - print a table with the number of columns specified in
+                      no_cols and using "sep" as the column border
+    'q' - quit
+
+Please enter a command: r
+Please specify the directory: test
+Please specify the filename: test_data.txt
+Please enter a command: p 2 &
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&       Case number       &    Daily revenue ($)    &
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&            1            &         8355.02         &
+&            2            &         8943.49         &
+&            3            &         8728.99         &
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Please enter a command: q
+Are you sure (y/n): n
+Please enter a command: p 3 @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@       Case number       @    Daily revenue ($)    @     Ave power (kW)      @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@            1            @         8355.02         @         1740.63         @
+@            2            @         8943.49         @         1863.23         @
+@            3            @         8728.99         @         1818.54         @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Please enter a command: q
+Are you sure (y/n): y
