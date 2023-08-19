@@ -9,12 +9,14 @@ Report = Union[pytest.CollectReport, pytest.TestReport]
 MIN_LINES_DIFF = 5
 
 
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    # execute all other hooks to obtain the report object
-    outcome = yield
-    rep = outcome.get_result()
-
+def pytest_assertrepr_compare(op, left, right):
+    if not isinstance(left, str) or not isinstance(right, str) or op != "==":
+        return None
+    right_lines = right.splitlines()
+    first_line = right_lines[0]
+    # Check to ensure the first line is a constant character
+    if any(char != first_line[0] for char in first_line[1:]):
+        return None
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_pycollect_makeitem(

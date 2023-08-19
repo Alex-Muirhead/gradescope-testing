@@ -3,6 +3,41 @@
         {
             "score": 0,
             "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_determine_windpower[case0]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_determine_windpower[case1]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_determine_windpower[case2]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_determine_windpower[case3]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_determine_windpower[case4]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
             "name": "tests/test_a1.py::test_determine_windpower[case0]",
             "output": "\n",
             "visibility": "visible"
@@ -52,14 +87,112 @@
         {
             "score": 0,
             "max_score": 0,
-            "name": "tests/test_a1.py::TestPrintTable::test_alternative_parameters_2",
+            "name": "tests/test_a1.py::TestDetermineMechCoeff::test_standard[case0]",
             "output": "\n",
             "visibility": "visible"
         },
         {
             "score": 0,
             "max_score": 0,
-            "name": "tests/test_a1.py::TestPrintTable::test_alternative_parameters_3",
+            "name": "tests/test_a1.py::TestDetermineMechCoeff::test_standard[case1]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineMechCoeff::test_standard[case2]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineMechCoeff::test_standard[case3]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineMechCoeff::test_zero_speed",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineMechPower::test_standard[case0]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineMechPower::test_standard[case1]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineMechPower::test_standard[case2]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineMechPower::test_standard[case3]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineRevenue::test_standard[case0]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineRevenue::test_standard[case1]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestDetermineRevenue::test_standard[case2]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestPrintTable::test_a_bunch[case0]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestPrintTable::test_a_bunch[case1]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestPrintTable::test_a_bunch[case2]",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 0,
+            "name": "tests/test_a1.py::TestPrintTable::test_a_bunch[case3]",
             "output": "\n",
             "visibility": "visible"
         },
@@ -94,57 +227,15 @@
         {
             "score": 0,
             "max_score": 0,
-            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_water_pumped_0",
-            "output": "\nself = <test_a1.TestDetermineHubSpeed object at 0x7f8d54e09510>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_water_pumped_0\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m):\u001b[90m\u001b[39;49;00m\n    \u001b[90m    \u001b[39;49;00m\u001b[33m\"\"\" test task sheet example \"\"\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        expected = \u001b[96mself\u001b[39;49;00m.answers[\u001b[94m0\u001b[39;49;00m]\u001b[90m\u001b[39;49;00m\n        actual = \u001b[96mself\u001b[39;49;00m.a1.determine_hub_speed(*\u001b[96mself\u001b[39;49;00m.parameters[\u001b[94m0\u001b[39;49;00m])\u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m actual == pytest.approx(expected)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: assert 11.566013223324225 == approx((11.56...5 \u00b1 1.2e-05,))\u001b[0m\n\u001b[1m\u001b[31mE         (pytest_assertion plugin: representation of details failed: \u001b[1m\u001b[31m/home/alex/miniconda3/envs/gradescope/lib/python3.11/site-packages/_pytest/python_api.py\u001b[0m:333: TypeError: object of type 'float' has no len().\u001b[0m\n\u001b[1m\u001b[31mE          Probably an object has a faulty __repr__.)\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_a1.py\u001b[0m:194: AssertionError",
-            "visibility": "visible"
-        },
-        {
-            "score": 0,
-            "max_score": 0,
-            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_water_pumped_1",
-            "output": "\nself = <test_a1.TestDetermineHubSpeed object at 0x7f8d54e09c10>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_water_pumped_1\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m):\u001b[90m\u001b[39;49;00m\n    \u001b[90m    \u001b[39;49;00m\u001b[33m\"\"\" test alternative generator power \"\"\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        expected = \u001b[96mself\u001b[39;49;00m.answers[\u001b[94m1\u001b[39;49;00m]\u001b[90m\u001b[39;49;00m\n        actual = \u001b[96mself\u001b[39;49;00m.a1.determine_hub_speed(*\u001b[96mself\u001b[39;49;00m.parameters[\u001b[94m1\u001b[39;49;00m])\u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m actual == pytest.approx(expected)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: assert 10.0 == approx((10.0 \u00b1 1.0e-05,))\u001b[0m\n\u001b[1m\u001b[31mE         (pytest_assertion plugin: representation of details failed: \u001b[1m\u001b[31m/home/alex/miniconda3/envs/gradescope/lib/python3.11/site-packages/_pytest/python_api.py\u001b[0m:333: TypeError: object of type 'float' has no len().\u001b[0m\n\u001b[1m\u001b[31mE          Probably an object has a faulty __repr__.)\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_a1.py\u001b[0m:200: AssertionError",
-            "visibility": "visible"
-        },
-        {
-            "score": 0,
-            "max_score": 0,
-            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_water_pumped_2",
-            "output": "\nself = <test_a1.TestDetermineHubSpeed object at 0x7f8d54e09990>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_water_pumped_2\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m):\u001b[90m\u001b[39;49;00m\n    \u001b[90m    \u001b[39;49;00m\u001b[33m\"\"\" test alternative pumping time \"\"\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        expected = \u001b[96mself\u001b[39;49;00m.answers[\u001b[94m2\u001b[39;49;00m]\u001b[90m\u001b[39;49;00m\n        actual = \u001b[96mself\u001b[39;49;00m.a1.determine_hub_speed(*\u001b[96mself\u001b[39;49;00m.parameters[\u001b[94m2\u001b[39;49;00m])\u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m actual == pytest.approx(expected)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: assert 20.0 == approx((20.0 \u00b1 2.0e-05,))\u001b[0m\n\u001b[1m\u001b[31mE         (pytest_assertion plugin: representation of details failed: \u001b[1m\u001b[31m/home/alex/miniconda3/envs/gradescope/lib/python3.11/site-packages/_pytest/python_api.py\u001b[0m:333: TypeError: object of type 'float' has no len().\u001b[0m\n\u001b[1m\u001b[31mE          Probably an object has a faulty __repr__.)\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_a1.py\u001b[0m:206: AssertionError",
-            "visibility": "visible"
-        },
-        {
-            "score": 0,
-            "max_score": 0,
-            "name": "tests/test_a1.py::TestDetermineHubSpeed::test_water_pumped_3",
-            "output": "\nself = <test_a1.TestDetermineHubSpeed object at 0x7f8d54e0a790>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_water_pumped_3\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m):\u001b[90m\u001b[39;49;00m\n    \u001b[90m    \u001b[39;49;00m\u001b[33m\"\"\" test alternative efficiency \"\"\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        expected = \u001b[96mself\u001b[39;49;00m.answers[\u001b[94m3\u001b[39;49;00m]\u001b[90m\u001b[39;49;00m\n        actual = \u001b[96mself\u001b[39;49;00m.a1.determine_hub_speed(*\u001b[96mself\u001b[39;49;00m.parameters[\u001b[94m3\u001b[39;49;00m])\u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m actual == pytest.approx(expected)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: assert 40.0 == approx((40.0 \u00b1 4.0e-05,))\u001b[0m\n\u001b[1m\u001b[31mE         (pytest_assertion plugin: representation of details failed: \u001b[1m\u001b[31m/home/alex/miniconda3/envs/gradescope/lib/python3.11/site-packages/_pytest/python_api.py\u001b[0m:333: TypeError: object of type 'float' has no len().\u001b[0m\n\u001b[1m\u001b[31mE          Probably an object has a faulty __repr__.)\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_a1.py\u001b[0m:212: AssertionError",
-            "visibility": "visible"
-        },
-        {
-            "score": 0,
-            "max_score": 0,
-            "name": "tests/test_a1.py::TestPrintTable::test_task_sheet_example",
-            "output": "\nself = <test_a1.TestPrintTable object at 0x7f8d54e0af50>, capsys = <_pytest.capture.CaptureFixture object at 0x7f8d54ebef10>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_task_sheet_example\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m, capsys):\u001b[90m\u001b[39;49;00m\n    \u001b[90m    \u001b[39;49;00m\u001b[33m\"\"\" Test the task sheet example \"\"\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        \u001b[96mself\u001b[39;49;00m.a1.print_table(*\u001b[96mself\u001b[39;49;00m.params[\u001b[94m0\u001b[39;49;00m])\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n        captured = capsys.readouterr()\u001b[90m\u001b[39;49;00m\n        expected = \u001b[96mself\u001b[39;49;00m.load_test_data(\u001b[33m\"\u001b[39;49;00m\u001b[33mprint_table/test_2\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m)\u001b[90m\u001b[39;49;00m\n        \u001b[90m# self.table_comparison.assert_table_almost_equal(expected, captured.out)\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m captured.out == expected\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: assert '************...*********\\n\\n' == '++++++++++++...+++++++++\\n\\n'\u001b[0m\n\u001b[1m\u001b[31mE         - +++++++++++++++++++++++++++++++++++++++++++++++++++++\u001b[0m\n\u001b[1m\u001b[31mE         + *****************************************************\u001b[0m\n\u001b[1m\u001b[31mE         - +       Case number       +    Daily revenue ($)    +\u001b[0m\n\u001b[1m\u001b[31mE         ? ^                         ^                         ^\u001b[0m\n\u001b[1m\u001b[31mE         + *       Case number       *    Daily revenue ($)    *\u001b[0m\n\u001b[1m\u001b[31mE         ? ^                         ^                         ^\u001b[0m\n\u001b[1m\u001b[31mE         - +++++++++++++++++++++++++++++++++++++++++++++++++++++...\u001b[0m\n\u001b[1m\u001b[31mE         \u001b[0m\n\u001b[1m\u001b[31mE         ...Full output truncated (13 lines hidden), use '-vv' to show\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_a1.py\u001b[0m:314: AssertionError",
-            "visibility": "visible"
-        },
-        {
-            "score": 0,
-            "max_score": 0,
-            "name": "tests/test_a1.py::TestPrintTable::test_alternative_parameters",
-            "output": "\nself = <test_a1.TestPrintTable object at 0x7f8d54e0b990>, capsys = <_pytest.capture.CaptureFixture object at 0x7f8d54e9ee90>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_alternative_parameters\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m, capsys):\u001b[90m\u001b[39;49;00m\n    \u001b[90m    \u001b[39;49;00m\u001b[33m\"\"\" Test with alternative attributes \"\"\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        \u001b[96mself\u001b[39;49;00m.a1.print_table(*\u001b[96mself\u001b[39;49;00m.params[\u001b[94m1\u001b[39;49;00m])\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n        captured = capsys.readouterr()\u001b[90m\u001b[39;49;00m\n        expected = \u001b[96mself\u001b[39;49;00m.load_test_data(\u001b[33m\"\u001b[39;49;00m\u001b[33mprint_table/test_1\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m)\u001b[90m\u001b[39;49;00m\n>       \u001b[96mself\u001b[39;49;00m.table_comparison.assert_table_almost_equal(expected, captured.out)\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: Your table has 9 lines, but 8 lines were expected.\u001b[0m\n\u001b[1m\u001b[31mE       Your table was:\u001b[0m\n\u001b[1m\u001b[31mE       line 1: +++++++++++++++++++++++++++++++++++++++++++++++++++++\u001b[0m\n\u001b[1m\u001b[31mE       line 2: +       Case number       +    Daily revenue ($)    +\u001b[0m\n\u001b[1m\u001b[31mE       line 3: +++++++++++++++++++++++++++++++++++++++++++++++++++++\u001b[0m\n\u001b[1m\u001b[31mE       line 4: +            1            +         8728.99         +\u001b[0m\n\u001b[1m\u001b[31mE       line 5: +            2            +         8355.02         +\u001b[0m\n\u001b[1m\u001b[31mE       line 6: +            3            +         8943.49         +\u001b[0m\n\u001b[1m\u001b[31mE       line 7: +            4            +         9325.25         +\u001b[0m\n\u001b[1m\u001b[31mE       line 8: +++++++++++++++++++++++++++++++++++++++++++++++++++++\u001b[0m\n\u001b[1m\u001b[31mE       line 9: \u001b[0m\n\u001b[1m\u001b[31mE       \u001b[0m\n\u001b[1m\u001b[31mE       The expected table was:\u001b[0m\n\u001b[1m\u001b[31mE       line 1: *****************************************************\u001b[0m\n\u001b[1m\u001b[31mE       line 2: *       Case number       *    Daily revenue ($)    *\u001b[0m\n\u001b[1m\u001b[31mE       line 3: *****************************************************\u001b[0m\n\u001b[1m\u001b[31mE       line 4: *            1            *         8355.02         *\u001b[0m\n\u001b[1m\u001b[31mE       line 5: *            2            *         8943.49         *\u001b[0m\n\u001b[1m\u001b[31mE       line 6: *            3            *         8728.99         *\u001b[0m\n\u001b[1m\u001b[31mE       line 7: *****************************************************\u001b[0m\n\u001b[1m\u001b[31mE       line 8:\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_a1.py\u001b[0m:322: AssertionError",
-            "visibility": "visible"
-        },
-        {
-            "score": 0,
-            "max_score": 0,
             "name": "tests/test_a1.py::TestMain::test_main_task_sheet",
-            "output": "\nself = <test_a1.TestMain object at 0x7f8d54ea7150>, capsys = <_pytest.capture.CaptureFixture object at 0x7f8d54eeba50>\nsysin = <_io.StringIO object at 0x7f8d54e06290>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_main_task_sheet\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m, capsys, sysin):\u001b[90m\u001b[39;49;00m\n    \u001b[90m    \u001b[39;49;00m\u001b[33m\"\"\" test main task sheet example \"\"\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        \u001b[94mwith\u001b[39;49;00m \u001b[96mopen\u001b[39;49;00m(\u001b[33m\"\u001b[39;49;00m\u001b[33mtest_data/task_8_in_1\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m) \u001b[94mas\u001b[39;49;00m filein:\u001b[90m\u001b[39;49;00m\n            sysin.writelines(filein.readlines())\u001b[90m\u001b[39;49;00m\n            sysin.seek(\u001b[94m0\u001b[39;49;00m)\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n        \u001b[94mwith\u001b[39;49;00m \u001b[96mopen\u001b[39;49;00m(\u001b[33m\"\u001b[39;49;00m\u001b[33mtest_data/main/task_8_out_1.final\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m) \u001b[94mas\u001b[39;49;00m fileout:\u001b[90m\u001b[39;49;00m\n            expected = fileout.read()\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n        \u001b[96mself\u001b[39;49;00m.a1.main()\u001b[90m\u001b[39;49;00m\n        captured = capsys.readouterr()\u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m captured.out == expected\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: assert 'Please enter... sure (y/n): ' == 'Please enter...re (y/n): y\\n'\u001b[0m\n\u001b[1m\u001b[31mE         - Please enter a command: h\u001b[0m\n\u001b[1m\u001b[31mE         ?                         -\u001b[0m\n\u001b[1m\u001b[31mE         + Please enter a command: \u001b[0m\n\u001b[1m\u001b[31mE         - \u001b[0m\n\u001b[1m\u001b[31mE               The available commands are:\u001b[0m\n\u001b[1m\u001b[31mE           \u001b[0m\n\u001b[1m\u001b[31mE               'h' - provide help message...\u001b[0m\n\u001b[1m\u001b[31mE         \u001b[0m\n\u001b[1m\u001b[31mE         ...Full output truncated (34 lines hidden), use '-vv' to show\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_a1.py\u001b[0m:496: AssertionError",
+            "output": "\nself = <test_a1.TestMain object at 0x7fe3a05c1fd0>, capsys = <_pytest.capture.CaptureFixture object at 0x7fe3a075b210>\nsysin = <_io.StringIO object at 0x7fe3a07a4e50>\n\n    def test_main_task_sheet(self, capsys, sysin):\n        \"\"\" test main task sheet example \"\"\"\n        with open(\"test_data/task_8_in_1\") as filein:\n            sysin.writelines(filein.readlines())\n            sysin.seek(0)\n    \n        with open(\"test_data/main/task_8_out_1.final\") as fileout:\n            expected = fileout.read()\n    \n        self.a1.main()\n        captured = capsys.readouterr()\n>       assert captured.out == expected\nE       AssertionError: assert 'Please enter... sure (y/n): ' == 'Please enter...re (y/n): y\\n'\nE         - Please enter a command: h\nE         ?                         -\nE         + Please enter a command: \nE         - \nE               The available commands are:\nE           \nE               'h' - provide help message...\nE         \nE         ...Full output truncated (34 lines hidden), use '-vv' to show\n\ntests/test_a1.py:667: AssertionError",
             "visibility": "visible"
         },
         {
             "score": 0,
             "max_score": 0,
             "name": "tests/test_a1.py::TestMain::test_main_directory",
-            "output": "\nself = <test_a1.TestMain object at 0x7f8d54ea7890>, capsys = <_pytest.capture.CaptureFixture object at 0x7f8d54ed9410>\nsysin = <_io.StringIO object at 0x7f8d54e064d0>\n\n    \u001b[94mdef\u001b[39;49;00m \u001b[92mtest_main_directory\u001b[39;49;00m(\u001b[96mself\u001b[39;49;00m, capsys, sysin):\u001b[90m\u001b[39;49;00m\n    \u001b[90m    \u001b[39;49;00m\u001b[33m\"\"\" test main task with data in different directory \"\"\"\u001b[39;49;00m\u001b[90m\u001b[39;49;00m\n        \u001b[94mwith\u001b[39;49;00m \u001b[96mopen\u001b[39;49;00m(\u001b[33m\"\u001b[39;49;00m\u001b[33mtest_data/task_8_in_2\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m) \u001b[94mas\u001b[39;49;00m filein:\u001b[90m\u001b[39;49;00m\n            sysin.writelines(filein.readlines())\u001b[90m\u001b[39;49;00m\n            sysin.seek(\u001b[94m0\u001b[39;49;00m)\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n        \u001b[94mwith\u001b[39;49;00m \u001b[96mopen\u001b[39;49;00m(\u001b[33m\"\u001b[39;49;00m\u001b[33mtest_data/main/task_8_out_2.final\u001b[39;49;00m\u001b[33m\"\u001b[39;49;00m) \u001b[94mas\u001b[39;49;00m fileout:\u001b[90m\u001b[39;49;00m\n            expected = fileout.read()\u001b[90m\u001b[39;49;00m\n    \u001b[90m\u001b[39;49;00m\n        \u001b[96mself\u001b[39;49;00m.a1.main()\u001b[90m\u001b[39;49;00m\n        captured = capsys.readouterr()\u001b[90m\u001b[39;49;00m\n>       \u001b[94massert\u001b[39;49;00m captured.out == expected\u001b[90m\u001b[39;49;00m\n\u001b[1m\u001b[31mE       AssertionError: assert 'Please enter... sure (y/n): ' == 'Please enter...re (y/n): y\\n'\u001b[0m\n\u001b[1m\u001b[31mE         - Please enter a command: h\u001b[0m\n\u001b[1m\u001b[31mE         ?                         -\u001b[0m\n\u001b[1m\u001b[31mE         + Please enter a command: \u001b[0m\n\u001b[1m\u001b[31mE         - \u001b[0m\n\u001b[1m\u001b[31mE               The available commands are:\u001b[0m\n\u001b[1m\u001b[31mE           \u001b[0m\n\u001b[1m\u001b[31mE               'h' - provide help message...\u001b[0m\n\u001b[1m\u001b[31mE         \u001b[0m\n\u001b[1m\u001b[31mE         ...Full output truncated (36 lines hidden), use '-vv' to show\u001b[0m\n\n\u001b[1m\u001b[31mtests/test_a1.py\u001b[0m:509: AssertionError",
+            "output": "\nself = <test_a1.TestMain object at 0x7fe3a05d1a90>, capsys = <_pytest.capture.CaptureFixture object at 0x7fe3a076a9d0>\nsysin = <_io.StringIO object at 0x7fe3a07a40d0>\n\n    def test_main_directory(self, capsys, sysin):\n        \"\"\" test main task with data in different directory \"\"\"\n        with open(\"test_data/task_8_in_2\") as filein:\n            sysin.writelines(filein.readlines())\n            sysin.seek(0)\n    \n        with open(\"test_data/main/task_8_out_2.final\") as fileout:\n            expected = fileout.read()\n    \n        self.a1.main()\n        captured = capsys.readouterr()\n>       assert captured.out == expected\nE       AssertionError: assert 'Please enter... sure (y/n): ' == 'Please enter...re (y/n): y\\n'\nE         - Please enter a command: h\nE         ?                         -\nE         + Please enter a command: \nE         - \nE               The available commands are:\nE           \nE               'h' - provide help message...\nE         \nE         ...Full output truncated (36 lines hidden), use '-vv' to show\n\ntests/test_a1.py:680: AssertionError",
             "visibility": "visible"
         }
     ]

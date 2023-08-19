@@ -8,8 +8,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, TypeVar, ParamSpec, Generic, Optional
 
-# from testrunner import AttributeGuesser, OrderedTestCase, RedirectStdIO, TestMaster, skipIfFailed
-# from test_arrays import assert_allclose
 import pytest
 from pytest import approx
 
@@ -51,7 +49,7 @@ class A1:
     @staticmethod
     def determine_mech_power(
         v_hub: float,
-        speeds: float,
+        speeds: tuple[float, float, float],
         radius: float,
         omega: float,
         rho: float,
@@ -61,7 +59,7 @@ class A1:
 
     @staticmethod
     def determine_revenue(
-        speeds: float,
+        speeds: tuple[float, float, float],
         h_meas: float,
         h_hub: float,
         alpha: float,
@@ -250,6 +248,7 @@ cases = (
 )
 
 
+# INFO: Task 1
 class TestDetermineHubSpeed:
     """ test determine_hub_speed"""
 
@@ -278,6 +277,7 @@ cases = (
 )
 
 
+# INFO: Task 2
 @pytest.mark.parametrize("case", cases)
 def test_determine_windpower(case):
     """ test task sheet example """
@@ -285,11 +285,106 @@ def test_determine_windpower(case):
     assert actual == approx(case.output, abs=1e-04, rel=1e-04)
 
 
+MechCoeffTestCase = TestCase.from_func(A1.determine_mech_coeff)
+
+test_coeffs = (
+    (-2.579e-03, 2.311e-2, -2.155e-3, 3.703e-5, -1.367e-6),
+    (-6.798e-3, 3.552e-2, -4.583e-3, 1.395e-4),
+    (1.338e-3, 1.604e-2, 0.0, 0.0, -6.22e-6)
+)
+
+bad_coeffs = (1.338e-3, 1.064e-2, 0.0, 0.0, -6.22e-6)
+
+cases = (
+    MechCoeffTestCase().with_params(11.566, 40, 2.11, test_coeffs[0]).with_output(0.4511148),
+    MechCoeffTestCase().with_params(11.566, 40, 2.11, test_coeffs[1]).with_output(0.4565363),
+    MechCoeffTestCase().with_params(11.566, 40, 2.11, bad_coeffs).with_output(0.4476399),
+    MechCoeffTestCase().with_params(11.566, 40, 2.11, ()).with_output(0.0)
+)
+
+
+# INFO: Task 3
+class TestDetermineMechCoeff:
+
+    @classmethod
+    def setup_class(cls):
+        if not hasattr(a1, "determine_mech_coeff"):
+            pytest.skip("Method not defined!")
+
+    @pytest.mark.parametrize("case", cases)
+    def test_standard(self, case: TestCase):
+        actual = case.call(a1.determine_mech_coeff)
+        assert actual == approx(case.output)
+
+    def test_zero_speed(self):
+        """ test zero speed """
+        case = MechCoeffTestCase().with_params(0, 40, 2.11, test_coeffs[1])
+        with pytest.raises(ZeroDivisionError):
+            case.call(a1.determine_mech_coeff)
+
+
+MechPowerTestCase = TestCase.from_func(A1.determine_mech_power)
+
+baseline = (2, 15, 12), 40, 2.11, 1.225, test_coeffs[0]
+cases = tuple(
+    MechPowerTestCase().with_params(v_hub, *baseline).with_output(output)
+    for v_hub, output in ((11.566, 2148.882198), (0, 0), (13, 2353.472014), (20, 0))
+)
+
+
+# INFO: Task 4
+class TestDetermineMechPower:
+
+    @classmethod
+    def setup_class(cls):
+        if not hasattr(a1, "determine_mech_power"):
+            pytest.skip("Method not defined!")
+
+    @pytest.mark.parametrize("case", cases)
+    def test_standard(self, case):
+        actual = case.call(a1.determine_mech_power)
+        assert actual == approx(case.output)
+
+
+RevenueTestCase = TestCase.from_func(A1.determine_revenue)
+
+params = (
+    ((2, 18, 12), 10, 60, 0.14, 40, 2.3, 1.225, test_coeffs[0]),
+    ((2, 17, 11), 10, 70, 0.14, 45, 1.8, 1.225, test_coeffs[1]),
+    ((2, 16, 10.5), 10, 50, 0.14, 35, 2.2, 1.225, test_coeffs[2]),
+)
+
+outputs = (
+    (8355.01921982596, 1740.629004130408),
+    (8943.487864949797, 1863.2266385312075),
+    (8728.98608907388, 1818.5387685570583),
+)
+
+cases = tuple(
+    RevenueTestCase().with_params(*p).with_output(o)
+    for p, o in zip(params, outputs)
+)
+
+
+# INFO: Task 5
+class TestDetermineRevenue:
+
+    @classmethod
+    def setup_class(cls):
+        if not hasattr(a1, "determine_revenue"):
+            pytest.skip("Method not defined!")
+
+    @pytest.mark.parametrize("case", cases)
+    def test_standard(self, case):
+        actual = case.call(a1.determine_revenue)
+        assert actual == approx(case.output)
+
+
 test_speeds = (
     (2, 18, 12),
     (2, 18, 11),
     (2, 17, 12),
-    (2, 17, 11.5),
+    (2, 17.5, 11.5),
     (2, 17, 11),
     (2, 16, 10.5)
 )
@@ -298,12 +393,6 @@ test_other_params = (
     (60, 0.14, 40, 2.3),
     (70, 0.14, 45, 1.8),
     (50, 0.14, 35, 2.2)
-)
-
-test_coeffs = (
-    (-2.579e-03, 2.311e-2, -2.155e-3, 3.703e-5, -1.367e-6),
-    (-6.798e-3, 3.552e-2, -4.583e-3, 1.395e-4),
-    (1.338e-3, 1.604e-2, 0.0, 0.0, -6.22e-6)
 )
 
 test_1 = (
@@ -360,12 +449,52 @@ cases = (
 "*            1            *         8355.02         *\n"
 "*            2            *         8943.49         *\n"
 "*            3            *         8728.99         *\n"
-"*****************************************************\n"
+"*****************************************************\n\n"
     ),
+    PrintTableTestCase()
+        .with_params(*test_2)
+        .with_stdout(
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+"+       Case number       +    Daily revenue ($)    +\n"
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+"+            1            +         8728.99         +\n"
+"+            2            +         8355.02         +\n"
+"+            3            +         8943.49         +\n"
+"+            4            +         9325.25         +\n"
+"+++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
+    ),
+    PrintTableTestCase()
+        .with_params(*test_3)
+        .with_stdout(
+"#####################################################\n"
+"#       Case number       #    Daily revenue ($)    #\n"
+"#####################################################\n"
+"#            1            #         8355.02         #\n"
+"#            2            #         8943.49         #\n"
+"#            3            #         8728.99         #\n"
+"#            4            #         9325.25         #\n"
+"#            5            #         5628.73         #\n"
+"#####################################################\n\n"
+    ),
+    PrintTableTestCase()
+        .with_params(*test_4)
+        .with_stdout(
+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
+"@       Case number       @    Daily revenue ($)    @\n"
+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
+"@            1            @         8830.37         @\n"
+"@            2            @         8355.02         @\n"
+"@            3            @         8728.99         @\n"
+"@            4            @         9325.25         @\n"
+"@            5            @         8355.02         @\n"
+"@            6            @         5628.73         @\n"
+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n"
+    )
 )
 
 
-class TestPrintTable(TestFunctionality):
+# INFO: Task 6
+class TestPrintTable:
     """ test print_table """
 
     @classmethod
@@ -376,7 +505,8 @@ class TestPrintTable(TestFunctionality):
     def test_a_bunch(self, capsys, case):
         actual = case.call(a1.print_table)
         captured = capsys.readouterr()
-        assert captured.out == case.stdout
+        # assert captured.out == case.stdout
+        self.table_comparison.assert_table_almost_equal(captured.out, case.stdout)
 
 
 class TestPrintTableGeneral(TestFunctionality):
