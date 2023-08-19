@@ -6,7 +6,7 @@ from functools import partial  # , wraps
 import inspect
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, TypeVar, ParamSpec, Generic
+from typing import Callable, TypeVar, ParamSpec, Generic, Optional
 
 # from testrunner import AttributeGuesser, OrderedTestCase, RedirectStdIO, TestMaster, skipIfFailed
 # from test_arrays import assert_allclose
@@ -98,12 +98,16 @@ class TestCase(Generic[P, T]):
     __test__ = False
     args: tuple
     kwargs: dict
-    output: None
+    stdin: str
+    output: Optional[T]
+    stdout: str
 
     def __init__(self):
         self.args = ()
         self.kwargs = {}
+        self.stdin = ""
         self.output = None
+        self.stdout = ""
 
     def with_params(self, *args: P.args, **kwargs: P.kwargs):
         self.args = args
@@ -114,8 +118,12 @@ class TestCase(Generic[P, T]):
         self.output = value
         return self
 
+    def with_stdout(self, value: str):
+        self.stdout = value
+        return self
+
     def call(self, func: Callable[P, T]) -> T:
-        return func(*self.args, **self.kwargs)
+        return func(*self.args, **self.kwargs)  # pyright: ignore
 
     @staticmethod
     def from_func(func: Callable[P, T]) -> "type[TestCase[P, T]]":
@@ -167,69 +175,6 @@ class TestFunctionality(TestA1):
         """ write test data to file """
         with open(self.TEST_DATA / filename, 'w', encoding='utf8') as file:
             file.write(output)
-
-
-# skipIfNotDefined = partial(
-#     skipIfFailed,
-#     TestDesign,
-#     TestDesign.test_functions_defined.__name__,
-# )
-
-
-# @skipIfNotDefined("determine_hub_speed")
-class TestDetermineHubSpeed(TestFunctionality):
-    """ test determine_hub_speed"""
-
-    @classmethod
-    def setup_class(cls):
-        if not hasattr(cls.a1, "determine_hub_speed"):
-            pytest.skip("Method not defined!")
-        cls.parameters = a1_support.load_data("test_data", "task_1_parameters")
-        cls.answers = a1_support.load_data("test_data", "task_1_answers")
-
-    def test_water_pumped_0(self):
-        """ test task sheet example """
-        expected = self.answers[0]
-        actual = self.a1.determine_hub_speed(*self.parameters[0])
-        assert actual == pytest.approx(expected)
-
-    def test_water_pumped_1(self):
-        """ test alternative generator power """
-        expected = self.answers[1]
-        actual = self.a1.determine_hub_speed(*self.parameters[1])
-        assert actual == pytest.approx(expected)
-
-    def test_water_pumped_2(self):
-        """ test alternative pumping time """
-        expected = self.answers[2]
-        actual = self.a1.determine_hub_speed(*self.parameters[2])
-        assert actual == pytest.approx(expected)
-
-    def test_water_pumped_3(self):
-        """ test alternative efficiency """
-        expected = self.answers[3]
-        actual = self.a1.determine_hub_speed(*self.parameters[3])
-        assert actual == pytest.approx(expected)
-
-
-WindpowerTestCase = TestCase.from_func(A1.determine_windpower)
-
-cases = (
-    WindpowerTestCase().with_params(11.566, 40, 1.225).with_output(4763.49279),
-    WindpowerTestCase().with_params(10, 1.0, 1.0).with_output(1.57079e+00),
-    WindpowerTestCase().with_params(-10, 1.0, 1.0).with_output(-1.57079e+00),
-    WindpowerTestCase().with_params(0, 1.0, 1.0).with_output(0.0e+0),
-    WindpowerTestCase().with_params(10, 0.0, 1.0).with_output(0.0e+0),
-    WindpowerTestCase().with_params(1_000_000.0, 1.0, 1.0).with_output(1.57079e+15),
-    WindpowerTestCase().with_params(5, 4.0, 0.31831).with_output(1.0e+0),
-)
-
-
-@pytest.mark.parametrize("case", cases)
-def test_determine_windpower(case):
-    """ test task sheet example """
-    actual = case.call(a1.determine_windpower)
-    assert actual == approx(case.output, abs=1e-04, rel=1e-04)
 
 
 def add_line_numbers(table):
@@ -294,51 +239,146 @@ class TableComparison:
                 )
 
 
-# @skipIfNotDefined("print_table")
+HubSpeedTestCase = TestCase.from_func(A1.determine_hub_speed)
+
+cases = (
+    HubSpeedTestCase().with_params(9, 10, 60, 0.14).with_output(11.5660132),
+    HubSpeedTestCase().with_params(10, 10, 20, 0.0).with_output(10.0),
+    HubSpeedTestCase().with_params(10, 10, 20, 1.0).with_output(20.0),
+    HubSpeedTestCase().with_params(10, 10, 20, 2.0).with_output(40.0),
+    HubSpeedTestCase().with_params(10, 10, 0, 0.0).with_output(10.0),
+)
+
+
+class TestDetermineHubSpeed:
+    """ test determine_hub_speed"""
+
+    @classmethod
+    def setup_class(cls):
+        if not hasattr(a1, "determine_hub_speed"):
+            pytest.skip("Method not defined!")
+
+    @pytest.mark.parametrize("case", cases)
+    def test_determine_windpower(self, case):
+        """ test task sheet example """
+        actual = case.call(a1.determine_hub_speed)
+        assert actual == approx(case.output, abs=1e-04, rel=1e-04)
+
+
+WindpowerTestCase = TestCase.from_func(A1.determine_windpower)
+
+cases = (
+    WindpowerTestCase().with_params(11.566, 40, 1.225).with_output(4763.49279),
+    WindpowerTestCase().with_params(10, 1.0, 1.0).with_output(1.57079e+00),
+    WindpowerTestCase().with_params(-10, 1.0, 1.0).with_output(-1.57079e+00),
+    WindpowerTestCase().with_params(0, 1.0, 1.0).with_output(0.0e+0),
+    WindpowerTestCase().with_params(10, 0.0, 1.0).with_output(0.0e+0),
+    WindpowerTestCase().with_params(1_000_000.0, 1.0, 1.0).with_output(1.57079e+15),
+    WindpowerTestCase().with_params(5, 4.0, 0.31831).with_output(1.0e+0),
+)
+
+
+@pytest.mark.parametrize("case", cases)
+def test_determine_windpower(case):
+    """ test task sheet example """
+    actual = case.call(a1.determine_windpower)
+    assert actual == approx(case.output, abs=1e-04, rel=1e-04)
+
+
+test_speeds = (
+    (2, 18, 12),
+    (2, 18, 11),
+    (2, 17, 12),
+    (2, 17, 11.5),
+    (2, 17, 11),
+    (2, 16, 10.5)
+)
+
+test_other_params = (
+    (60, 0.14, 40, 2.3),
+    (70, 0.14, 45, 1.8),
+    (50, 0.14, 35, 2.2)
+)
+
+test_coeffs = (
+    (-2.579e-03, 2.311e-2, -2.155e-3, 3.703e-5, -1.367e-6),
+    (-6.798e-3, 3.552e-2, -4.583e-3, 1.395e-4),
+    (1.338e-3, 1.604e-2, 0.0, 0.0, -6.22e-6)
+)
+
+test_1 = (
+    (
+        (test_speeds[0], 10, 60, 0.14, 40, 2.3, 1.225, test_coeffs[0]),
+        (test_speeds[4], 10, 70, 0.14, 45, 1.8, 1.225, test_coeffs[1]),
+        (test_speeds[5], 10, 50, 0.14, 35, 2.2, 1.225, test_coeffs[2])
+    ),
+    "*"
+)
+
+test_2 = (
+    (
+        (test_speeds[5], 10, 50, 0.14, 35, 2.2, 1.225, test_coeffs[2]),
+        (test_speeds[0], 10, 60, 0.14, 40, 2.3, 1.225, test_coeffs[0]),
+        (test_speeds[4], 10, 70, 0.14, 45, 1.8, 1.225, test_coeffs[1]),
+        (test_speeds[2], 10, 60, 0.14, 45, 1.8, 1.225, test_coeffs[1]),
+    ),
+    "+"
+)
+
+test_3 = (
+    (
+        (test_speeds[0], 10, 60, 0.14, 40, 2.3, 1.225, test_coeffs[0]),
+        (test_speeds[4], 10, 70, 0.14, 45, 1.8, 1.225, test_coeffs[1]),
+        (test_speeds[5], 10, 50, 0.14, 35, 2.2, 1.225, test_coeffs[2]),
+        (test_speeds[2], 10, 60, 0.14, 45, 1.8, 1.225, test_coeffs[1]),
+        (test_speeds[1], 10, 70, 0.14, 35, 1.8, 1.225, test_coeffs[1]),
+    ),
+    "#"
+)
+
+test_4 = (
+    (
+        (test_speeds[3], 10, 65, 0.14, 45, 2.1, 1.225, test_coeffs[1]),
+        (test_speeds[0], 10, 60, 0.14, 40, 2.3, 1.225, test_coeffs[0]),
+        (test_speeds[5], 10, 50, 0.14, 35, 2.2, 1.225, test_coeffs[2]),
+        (test_speeds[2], 10, 60, 0.14, 45, 1.8, 1.225, test_coeffs[1]),
+        (test_speeds[0], 10, 60, 0.14, 40, 2.3, 1.225, test_coeffs[0]),
+        (test_speeds[1], 10, 70, 0.14, 35, 1.8, 1.225, test_coeffs[1]),
+    ),
+    "@"
+)
+
+PrintTableTestCase = TestCase.from_func(A1.print_table)
+
+cases = (
+    PrintTableTestCase()
+        .with_params(*test_1)
+        .with_stdout(
+"*****************************************************\n"
+"*       Case number       *    Daily revenue ($)    *\n"
+"*****************************************************\n"
+"*            1            *         8355.02         *\n"
+"*            2            *         8943.49         *\n"
+"*            3            *         8728.99         *\n"
+"*****************************************************\n"
+    ),
+)
+
+
 class TestPrintTable(TestFunctionality):
     """ test print_table """
 
     @classmethod
     def setup_class(cls) -> None:
         cls.table_comparison = TableComparison()
-        from test_data.task_6_parameters import test_1, test_2, test_3, test_4
-        cls.params = (test_1, test_2, test_3, test_4)
 
-    def test_task_sheet_example(self, capsys):
-        """ Test the task sheet example """
-        self.a1.print_table(*self.params[0])
-
+    @pytest.mark.parametrize("case", cases)
+    def test_a_bunch(self, capsys, case):
+        actual = case.call(a1.print_table)
         captured = capsys.readouterr()
-        expected = self.load_test_data("print_table/test_2")
-        # self.table_comparison.assert_table_almost_equal(expected, captured.out)
-        assert captured.out == expected
-
-    def test_alternative_parameters(self, capsys):
-        """ Test with alternative attributes """
-        self.a1.print_table(*self.params[1])
-
-        captured = capsys.readouterr()
-        expected = self.load_test_data("print_table/test_1")
-        self.table_comparison.assert_table_almost_equal(expected, captured.out)
-
-    def test_alternative_parameters_2(self, capsys):
-        """ Test with alternative attributes 2 """
-        self.a1.print_table(*self.params[2])
-
-        captured = capsys.readouterr()
-        expected = self.load_test_data("print_table/test_3")
-        self.table_comparison.assert_table_almost_equal(expected, captured.out)
-
-    def test_alternative_parameters_3(self, capsys):
-        """ Test with alternative attributes 3 """
-        self.a1.print_table(*self.params[3])
-
-        captured = capsys.readouterr()
-        expected = self.load_test_data("print_table/test_4")
-        self.table_comparison.assert_table_almost_equal(expected, captured.out)
+        assert captured.out == case.stdout
 
 
-# @skipIfNotDefined("print_table_general")
 class TestPrintTableGeneral(TestFunctionality):
     """ test print_table general """
 
@@ -381,7 +421,6 @@ class TestPrintTableGeneral(TestFunctionality):
         self.table_comparison.assert_table_almost_equal(expected, captured.out)
 
 
-# @skipIfNotDefined("main")
 class TestMain(TestFunctionality):
     """ test main """
 
