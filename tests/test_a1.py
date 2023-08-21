@@ -2,8 +2,6 @@
 Tests for ENGG1001 Assignment 1 Sem2 2022
 """
 
-from functools import partial  # , wraps
-import inspect
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, TypeVar, ParamSpec, Generic, Optional
@@ -11,7 +9,6 @@ from typing import Callable, TypeVar, ParamSpec, Generic, Optional
 import pytest
 from pytest import approx
 
-import a1_support
 import a1
 
 
@@ -112,6 +109,9 @@ class TestCase(Generic[P, T]):
         self.kwargs = kwargs
         return self
 
+    def with_stdin(self, stream):
+        self.stdin = stream
+
     def with_output(self, value: T):
         self.output = value
         return self
@@ -130,7 +130,6 @@ class TestCase(Generic[P, T]):
 
 class TestA1(object):
     a1: A1 = a1
-    a1_support: ...
 
 
 # class TestDesign(TestA1):
@@ -237,6 +236,8 @@ class TableComparison:
                 )
 
 
+# ------------------------------[ INFO: Task 1 ]------------------------------
+
 HubSpeedTestCase = TestCase.from_func(A1.determine_hub_speed)
 
 cases = (
@@ -248,7 +249,6 @@ cases = (
 )
 
 
-# INFO: Task 1
 class TestDetermineHubSpeed:
     """ test determine_hub_speed"""
 
@@ -264,6 +264,8 @@ class TestDetermineHubSpeed:
         assert actual == approx(case.output, abs=1e-04, rel=1e-04)
 
 
+# ------------------------------[ INFO: Task 2 ]------------------------------
+
 WindpowerTestCase = TestCase.from_func(A1.determine_windpower)
 
 cases = (
@@ -277,13 +279,14 @@ cases = (
 )
 
 
-# INFO: Task 2
 @pytest.mark.parametrize("case", cases)
 def test_determine_windpower(case):
     """ test task sheet example """
     actual = case.call(a1.determine_windpower)
     assert actual == approx(case.output, abs=1e-04, rel=1e-04)
 
+
+# ------------------------------[ INFO: Task 3 ]------------------------------
 
 MechCoeffTestCase = TestCase.from_func(A1.determine_mech_coeff)
 
@@ -303,7 +306,6 @@ cases = (
 )
 
 
-# INFO: Task 3
 class TestDetermineMechCoeff:
 
     @classmethod
@@ -323,6 +325,8 @@ class TestDetermineMechCoeff:
             case.call(a1.determine_mech_coeff)
 
 
+# ------------------------------[ INFO: Task 4 ]------------------------------
+
 MechPowerTestCase = TestCase.from_func(A1.determine_mech_power)
 
 baseline = (2, 15, 12), 40, 2.11, 1.225, test_coeffs[0]
@@ -332,7 +336,6 @@ cases = tuple(
 )
 
 
-# INFO: Task 4
 class TestDetermineMechPower:
 
     @classmethod
@@ -345,6 +348,8 @@ class TestDetermineMechPower:
         actual = case.call(a1.determine_mech_power)
         assert actual == approx(case.output)
 
+
+# ------------------------------[ INFO: Task 5 ]------------------------------
 
 RevenueTestCase = TestCase.from_func(A1.determine_revenue)
 
@@ -366,7 +371,6 @@ cases = tuple(
 )
 
 
-# INFO: Task 5
 class TestDetermineRevenue:
 
     @classmethod
@@ -379,6 +383,8 @@ class TestDetermineRevenue:
         actual = case.call(a1.determine_revenue)
         assert actual == approx(case.output)
 
+
+# ------------------------------[ INFO: Task 6 ]------------------------------
 
 test_speeds = (
     (2, 18, 12),
@@ -441,59 +447,58 @@ PrintTableTestCase = TestCase.from_func(A1.print_table)
 
 cases = (
     PrintTableTestCase()
-        .with_params(*test_1)
-        .with_stdout(
-"*****************************************************\n"
-"*       Case number       *    Daily revenue ($)    *\n"
-"*****************************************************\n"
-"*            1            *         8355.02         *\n"
-"*            2            *         8943.49         *\n"
-"*            3            *         8728.99         *\n"
-"*****************************************************\n\n"
+    .with_params(*test_1)
+    .with_stdout(
+        "*****************************************************\n"
+        "*       Case number       *    Daily revenue ($)    *\n"
+        "*****************************************************\n"
+        "*            1            *         8355.02         *\n"
+        "*            2            *         8943.49         *\n"
+        "*            3            *         8728.99         *\n"
+        "*****************************************************\n\n"
     ),
     PrintTableTestCase()
-        .with_params(*test_2)
-        .with_stdout(
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-"+       Case number       +    Daily revenue ($)    +\n"
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-"+            1            +         8728.99         +\n"
-"+            2            +         8355.02         +\n"
-"+            3            +         8943.49         +\n"
-"+            4            +         9325.25         +\n"
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
+    .with_params(*test_2)
+    .with_stdout(
+        "+++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+        "+       Case number       +    Daily revenue ($)    +\n"
+        "+++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+        "+            1            +         8728.99         +\n"
+        "+            2            +         8355.02         +\n"
+        "+            3            +         8943.49         +\n"
+        "+            4            +         9325.25         +\n"
+        "+++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
     ),
     PrintTableTestCase()
-        .with_params(*test_3)
-        .with_stdout(
-"#####################################################\n"
-"#       Case number       #    Daily revenue ($)    #\n"
-"#####################################################\n"
-"#            1            #         8355.02         #\n"
-"#            2            #         8943.49         #\n"
-"#            3            #         8728.99         #\n"
-"#            4            #         9325.25         #\n"
-"#            5            #         5628.73         #\n"
-"#####################################################\n\n"
+    .with_params(*test_3)
+    .with_stdout(
+        "#####################################################\n"
+        "#       Case number       #    Daily revenue ($)    #\n"
+        "#####################################################\n"
+        "#            1            #         8355.02         #\n"
+        "#            2            #         8943.49         #\n"
+        "#            3            #         8728.99         #\n"
+        "#            4            #         9325.25         #\n"
+        "#            5            #         5628.73         #\n"
+        "#####################################################\n\n"
     ),
     PrintTableTestCase()
-        .with_params(*test_4)
-        .with_stdout(
-"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
-"@       Case number       @    Daily revenue ($)    @\n"
-"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
-"@            1            @         8830.37         @\n"
-"@            2            @         8355.02         @\n"
-"@            3            @         8728.99         @\n"
-"@            4            @         9325.25         @\n"
-"@            5            @         8355.02         @\n"
-"@            6            @         5628.73         @\n"
-"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n"
+    .with_params(*test_4)
+    .with_stdout(
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
+        "@       Case number       @    Daily revenue ($)    @\n"
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
+        "@            1            @         8830.37         @\n"
+        "@            2            @         8355.02         @\n"
+        "@            3            @         8728.99         @\n"
+        "@            4            @         9325.25         @\n"
+        "@            5            @         8355.02         @\n"
+        "@            6            @         5628.73         @\n"
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n"
     )
 )
 
 
-# INFO: Task 6
 class TestPrintTable:
     """ test print_table """
 
@@ -503,11 +508,14 @@ class TestPrintTable:
 
     @pytest.mark.parametrize("case", cases)
     def test_a_bunch(self, capsys, case):
+        # TODO: Also check return value?
         actual = case.call(a1.print_table)
         captured = capsys.readouterr()
         # assert captured.out == case.stdout
         self.table_comparison.assert_table_almost_equal(captured.out, case.stdout)
 
+
+# ------------------------------[ INFO: Task 7 ]------------------------------
 
 class TestPrintTableGeneral(TestFunctionality):
     """ test print_table general """
@@ -676,31 +684,3 @@ class TestMain(TestFunctionality):
         self.a1.main()
         captured = capsys.readouterr()
         assert captured.out == expected
-
-
-def main():
-    """ run tests """
-    test_cases = [
-        # TestDesign,
-        TestDetermineHubSpeed,
-        TestDetermineWindpower,
-        TestPrintTable,
-        TestPrintTableGeneral,
-        TestMain
-    ]
-
-    master = TestMaster(max_diff=None,
-                        suppress_stdout=True,
-                        # ignore_import_fails=True,
-                        # timeout=560,
-                        include_no_print=True,
-                        # include_no_print=False,
-                        scripts=[
-                            ('a1_support', 'a1_support.py'),
-                            ('a1', 'a1.py')
-                        ])
-    master.run(test_cases)
-
-
-if __name__ == '__main__':
-    main()
